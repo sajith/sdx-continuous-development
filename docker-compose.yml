@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  mongodb:
+    container_name: mongo_db
+    image: mongo_db
+    volumes:
+      - ./data/db:/app/data/db
+    ports:
+      - 27017:27017
+  sdxapi:
+    container_name: sdx_api
+    image: sdx_api
+    restart: always
+    volumes:
+      - ./app/:/app/
+    ports:
+      - 8800:8800
+    environment:
+      - FLASK_APP=app/__init__.py
+      - FLASK_RUN_HOST=0.0.0.0
+      - FLASK_ENV=development
+    depends_on:
+      - mongodb
+    command: gunicorn wsgi:app --bind 0.0.0.0:8800
+  nginx:
+    container_name: nginx_ws
+    image: nginx_ws
+    ports:
+      - 80:80
+    depends_on:
+      - sdxapi
