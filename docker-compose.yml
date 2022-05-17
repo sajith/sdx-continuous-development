@@ -22,6 +22,27 @@ services:
       - FLASK_ENV=development
     depends_on:
       - mongodb
+  amlight:
+    container_name: amlight
+    image: amlight
+    restart: always
+    ports:
+      - 6653:6653
+      - 8181:8181
+  sax:
+    container_name: sax
+    image: sax
+    restart: always
+    ports:
+      - 6654:6653
+      - 8182:8181
+  tenet:
+    container_name: tenet
+    image: tenet
+    restart: always
+    ports:
+      - 6655:6653
+      - 8183:8181
   nginx:
     container_name: nginx_ws
     image: nginx_ws

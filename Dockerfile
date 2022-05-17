@@ -30,6 +30,7 @@ RUN apt-get install --assume-yes --no-install-recommends \
 		dirmngr \
 		dpkg-dev \
 		gcc \
+                git \
 		gnupg \
                 gunicorn \
                 iputils-ping \
