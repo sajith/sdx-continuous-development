@@ -8,5 +8,4 @@ WORKDIR /app
 # add app
 COPY ./app /app/
 
-# run server
-COPY wsgi.py /wsgi.py
+ENTRYPOINT ["./gunicorn.sh"]
