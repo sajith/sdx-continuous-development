@@ -1,3 +1,4 @@
+.DS_Store
 __pycache__
 *.py[cod]
 *$py.class
@@ -97,4 +98,3 @@ ENV/
 # Auxilary files to test the controller
 aux_*.py
 aux_*.sh
-
