@@ -46,6 +46,7 @@ RUN apt-get install --assume-yes --no-install-recommends \
 		libsqlite3-dev \
 		libssl-dev \
 		make \
+                mininet \
 		netbase \
                 netcat \
                 software-properties-common \
