@@ -45,6 +45,7 @@ RUN apt-get install --assume-yes --no-install-recommends \
                 libreadline-dev \
 		libsqlite3-dev \
 		libssl-dev \
+                lsof \
 		make \
                 mininet \
 		netbase \

@@ -1,5 +1,5 @@
 # pull os base image
-FROM os_base
+FROM debian_base
 
 # set work directory
 RUN mkdir /var/lib/kytos
@@ -17,6 +17,6 @@ RUN git clone https://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@github.com/atlant
 RUN for repo in python-openflow kytos-utils kytos flow_manager mef_eline of_core of_lldp pathfinder storehouse topology sdx_topology/app; do cd ${repo}; python3 setup.py develop; cd ..; done
 
 # add app
-COPY start_kytos.sh .
-RUN chmod 755 /usr/src/kytos/start_kytos.sh
-ENTRYPOINT ["./start_kytos.sh"]
+COPY amlight_kytos.sh .
+RUN chmod 755 /usr/src/kytos/amlight_kytos.sh
+ENTRYPOINT ["./amlight_kytos.sh"]

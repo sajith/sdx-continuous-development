@@ -1,44 +1,11 @@
 version: '3.8'
 
-networks:
-  nginx-proxy:
-    external: true
-
 services:
-  mongodb:
-    container_name: mongo_db
-    image: mongo_db
-    volumes:
-      - ./data/db:/app/data/db
-    networks:
-      nginx-proxy:
-        ipv4_address: 172.20.0.2
-    ports:
-      - 27017:27017
-  sdxapi:
-    container_name: sdx_api
-    image: sdx_api
-    restart: always
-    volumes:
-      - ./app/:/app/
-    networks:
-      nginx-proxy:
-        ipv4_address: 172.20.0.3
-    ports:
-      - 8800:8800
-    environment:
-      - FLASK_APP=app/__init__.py
-      - FLASK_RUN_HOST=0.0.0.0
-      - FLASK_ENV=development
-    depends_on:
-      - mongodb
   amlight:
     container_name: amlight
     image: amlight
     restart: always
-    networks:
-      nginx-proxy:
-        ipv4_address: 172.20.0.4
+    privileged: true
     ports:
       - 6653:6653
       - 8181:8181
@@ -46,41 +13,28 @@ services:
     container_name: sax
     image: sax
     restart: always
-    networks:
-      nginx-proxy:
-        ipv4_address: 172.20.0.5
+    privileged: true
     ports:
-      - 6654:6653
-      - 8182:8181
+      - 6654:6654
+      - 8282:8181
   tenet:
     container_name: tenet
     image: tenet
     restart: always
-    networks:
-      nginx-proxy:
-        ipv4_address: 172.20.0.6
+    privileged: true
     ports:
-      - 6655:6653
-      - 8183:8181
+      - 6655:6655
+      - 8383:8181
   mininet:
     container_name: mininet
     image: mininet
     restart: always
+    privileged: true
+    network_mode: host
+    volumes:
+      - /lib/modules:/lib/modules
     depends_on:
       - amlight
       - sax
       - tenet
-    networks:
-      nginx-proxy:
-        ipv4_address: 172.20.0.7
-  nginx:
-    container_name: nginx_ws
-    image: nginx_ws
-    ports:
-      - 80:80
-    depends_on:
-      - sdxapi
-    networks:
-      nginx-proxy:
-        ipv4_address: 172.20.0.8
 

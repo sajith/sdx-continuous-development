@@ -27,7 +27,7 @@ def custom_topo(amlight_ctlr, sax_ctlr, tenet_ctlr):
     net = Mininet(topo=None, build=False, controller=RemoteController, switch=OVSSwitch)
 
     # ********************************************** TENET OXP - Start ************************************************
-    TenetController = net.addController('tenet_ctrl', controller=RemoteController, ip=tenet_ctlr, port=6653)
+    TenetController = net.addController('tenet_ctrl', controller=RemoteController, ip=tenet_ctlr, port=6655)
     TenetController.start()
 
     tenet_sw1 = net.addSwitch('Tenet01', listenPort=6701, dpid='cc00000000000006')
@@ -48,7 +48,7 @@ def custom_topo(amlight_ctlr, sax_ctlr, tenet_ctlr):
     # ************************************************ TENET OXP - End ************************************************
 
     # ************************************************ SAX OXP - Start ************************************************
-    SaxController = net.addController('sax_ctrl', controller=RemoteController, ip=sax_ctlr, port=6653)
+    SaxController = net.addController('sax_ctrl', controller=RemoteController, ip=sax_ctlr, port=6654)
     SaxController.start()
 
     sax_sw1 = net.addSwitch('Sax01', listenPort=6801, dpid='dd00000000000004')
@@ -113,11 +113,11 @@ def custom_topo(amlight_ctlr, sax_ctlr, tenet_ctlr):
 
 if __name__ == '__main__':
     setLogLevel('info')  # for CLI output
-    #amlight_ctlr = sys.argv[1] if len(sys.argv) > 1 else '172.31.13.114'
-    amlight_ctlr = sys.argv[1] if len(sys.argv) > 1 else '3.218.56.104'
-    #sax_ctlr = sys.argv[2] if len(sys.argv) > 2 else '172.31.6.170'
-    sax_ctlr = sys.argv[2] if len(sys.argv) > 2 else '3.219.254.70'
-    #tenet_ctlr = sys.argv[3] if len(sys.argv) > 3 else '172.31.14.86'
-    tenet_ctlr = sys.argv[3] if len(sys.argv) > 3 else '23.20.21.212'
+    amlight_ctlr = sys.argv[1] if len(sys.argv) > 1 else '0.0.0.0'
+    #amlight_ctlr = sys.argv[1] if len(sys.argv) > 1 else '192.168.0.4'
+    sax_ctlr = sys.argv[2] if len(sys.argv) > 2 else '0.0.0.0'
+    #sax_ctlr = sys.argv[2] if len(sys.argv) > 2 else '192.168.0.5'
+    tenet_ctlr = sys.argv[3] if len(sys.argv) > 3 else '0.0.0.0'
+    #tenet_ctlr = sys.argv[3] if len(sys.argv) > 3 else '192.168.0.6'
     custom_topo(amlight_ctlr, sax_ctlr, tenet_ctlr)
     Cleanup.cleanup()

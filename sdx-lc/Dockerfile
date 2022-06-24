@@ -1,5 +1,5 @@
 # pull os base image
-FROM os_base
+FROM debian_base
 
 # set work directory
 RUN mkdir -p /app

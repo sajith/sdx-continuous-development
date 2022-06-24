@@ -1,12 +1,11 @@
-# pull os base image
-FROM os_base
+FROM ubuntu_base
 
-RUN mkdir -p /usr/src/mininet
-WORKDIR /usr/src/mininet
+USER root
+WORKDIR /root
 
-# add app
-COPY link-hosts.py .
-RUN chmod 755 /usr/src/mininet/link-hosts.py
-COPY start_mininet.sh .
-RUN chmod 755 /usr/src/mininet/start_mininet.sh
-# ENTRYPOINT ["./start_mininet.sh"]
+COPY start_mininet.sh /
+COPY link-hosts.py /
+RUN chmod +x /start_mininet.sh
+RUN chmod 775 /link-hosts.py
+
+ENTRYPOINT ["/start_mininet.sh"]
