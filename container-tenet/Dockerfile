@@ -17,6 +17,6 @@ RUN git clone https://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@github.com/atlant
 RUN for repo in python-openflow kytos-utils kytos flow_manager mef_eline of_core of_lldp pathfinder storehouse topology sdx_topology/app; do cd ${repo}; python3 setup.py develop; cd ..; done
 
 # add app
-COPY tenet_kytos.sh .
+COPY ./container-tenet/tenet_kytos.sh .
 RUN chmod 755 /usr/src/kytos/tenet_kytos.sh
 ENTRYPOINT ["./tenet_kytos.sh"]

@@ -6,4 +6,4 @@ ENV MONGO_INITDB_ROOT_USERNAME admin-user
 ENV MONGO_INITDB_ROOT_PASSWORD admin-password
 ENV MONGO_INITDB_DATABASE admin
 RUN mkdir -p /data/db
-COPY mongo-init.js /docker-entrypoint-initdb.d/mongo-init.js
+COPY ./container-mongo/mongo-init.js /docker-entrypoint-initdb.d/mongo-init.js
