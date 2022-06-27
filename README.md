@@ -48,13 +48,31 @@ $ python3.9 -m pip install --upgrade pip
 
  $ podman machine start
 
+ $ pip3 install podman-compose
+
 ## Preparing your environment
 
 ```
 $HOME/.config/containers/registries.conf is a TOML config file that can be used to customize whitelisted registries that are allowed to be searched and used as image sources
 ```
 
+### Building static network
+
+
+```
+The pod_network.sh script creates the static network for mininet
+```
+
+podman network create --gateway "192.168.0.1" --subnet "192.168.0.0/24" kytos_network
+
+
+
 ### Building base containers
+
+
+```
+The pod_build.sh script creates all images below
+```
 
 ```
 Create a local Debian base image to be used for kytos containers
@@ -66,7 +84,7 @@ Create a local Debian base image to be used for kytos containers
 Access the image with bash
 ```
 
- $ podman run -it debian_base bash
+ $ podman run -it debian_base /bin/bash
 
 
 ```

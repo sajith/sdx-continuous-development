@@ -1,2 +1,2 @@
 #!/bin/sh
-exec kytosd -l 192.168.0.5 -P 6654 -f
+exec kytosd -P 6654 -f

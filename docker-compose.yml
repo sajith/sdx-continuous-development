@@ -5,7 +5,9 @@ services:
     container_name: amlight
     image: amlight
     restart: always
-    privileged: true
+    network:
+      kytos_network:
+        ipv4_address: 192.168.0.2
     ports:
       - 6653:6653
       - 8181:8181
@@ -13,7 +15,9 @@ services:
     container_name: sax
     image: sax
     restart: always
-    privileged: true
+    network:
+      kytos_network:
+        ipv4_address: 192.168.0.3
     ports:
       - 6654:6654
       - 8282:8181
@@ -21,7 +25,9 @@ services:
     container_name: tenet
     image: tenet
     restart: always
-    privileged: true
+    network:
+      kytos_network:
+        ipv4_address: 192.168.0.4
     ports:
       - 6655:6655
       - 8383:8181
@@ -29,10 +35,9 @@ services:
     container_name: mininet
     image: mininet
     restart: always
-    privileged: true
-    network_mode: host
-    volumes:
-      - /lib/modules:/lib/modules
+    network:
+      kytos_network:
+        ipv4_address: 192.168.0.5
     depends_on:
       - amlight
       - sax
