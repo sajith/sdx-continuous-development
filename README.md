@@ -5,7 +5,6 @@
 * Along with Python and FastAPI, we'll use Docker to quickly set up our local development environment and simplify deployment. 
 * We'll use pytest instead of unittest for writing unit and integration tests to test the API. 
 * We'll store the code on a GitHub repository and utilize GitHub Actions to run tests before deploying to AWS.
-* FastAPI is a modern, batteries-included Python web framework that's perfect for building RESTful APIs. It can handle both synchronous and asynchronous requests and has built-in support for data validation, JSON serialization, authentication and authorization, and OpenAPI (version 3.0.2 as of writing) documentation. 
 * GitHub Actions is a continuous integration and delivery (CI/CD) solution, fully integrated with GitHub. 
 * MONGODB
 
@@ -32,30 +31,81 @@ $ pip3 install -r requirements.txt
 $ python3.9 -m pip install --upgrade pip
 ```
 
-Run the server from the "sdx-api" directory:
+## PODMAN
 
-(venv)$ uvicorn main:app --reload --workers 1 --host 0.0.0.0 --port 8000
+### Installing Podman on Debian
 
-FastAPI automatically generates a schema based on the OpenAPI standard. 
+ $ apt-get –y install podman
 
-view the raw JSON at http://localhost:8000/openapi.json.
+### Installing Podman on macOS
 
-view the interactive API documentation at http://localhost:8000/sdxapi
+ $ brew install podman
 
-(env)$ export ENVIRONMENT=prod
-(env)$ export TESTING=1
+``` To initialize the VM running the Linux box, run the following commands:
+```
 
-Run the server. Now, at http://localhost:8000/ping, you should see:
+ $ podman machine init
 
-{
-  "environment": "prod",
-  "testing": true
-}
+ $ podman machine start
 
-Essentially, get_settings gets called for each request. 
-Refactoring the config so that the settings were read from a file, instead of 
-from environment variables, it would be much too slow.
+## Preparing your environment
 
-Decorate get_settings with lru_cache to cache the settings so get_settings is only called once.
+```
+$HOME/.config/containers/registries.conf is a TOML config file that can be used to customize whitelisted registries that are allowed to be searched and used as image sources
+```
+
+### Building base containers
+
+```
+Create a local Debian base image to be used for kytos containers
+```
+
+ $ podman build -f ./os_base/debian_base/Dockerfile -t debian_base .
+
+```
+Access the image with bash
+```
+
+ $ podman run -it debian_base bash
 
 
+```
+Access the image id
+```
+
+ $ podman images
+
+
+```
+Removing the image
+```
+
+ $ podman image rm <image_id> 
+
+
+```
+Create a local kytos images using the Debian base image 
+```
+
+ $ podman build -f ./container-amlight/Dockerfile -t amlight .
+ $ podman build -f ./container-sax/Dockerfile -t sax .
+ $ podman build -f ./container-tenet/Dockerfile -t tenet .
+
+
+```
+Create a local mongodb image 
+```
+
+podman build -f ./container-mongo/Dockerfile -t mongo_db .
+
+```
+Create a local Ubuntu base image to be used for mininet container
+```
+
+podman build -f ./os_base/ubuntu_base/Dockerfile -t ubuntu_base .
+
+```
+Create a local mininet image 
+```
+
+podman build -f ./container-mininet/Dockerfile -t mininet .

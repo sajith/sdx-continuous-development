@@ -57,14 +57,6 @@ RUN apt-get install --assume-yes --no-install-recommends \
 		zlib1g-dev
 
 WORKDIR /usr/src/
-RUN wget https://www.python.org/ftp/python/3.9.10/Python-3.9.10.tgz
-RUN tar xvf Python-3.9.10.tgz
-RUN cd /usr/src/Python-3.9.10/
-RUN /usr/src/Python-3.9.10/configure --enable-optimizations
-RUN make clean
-RUN make
-RUN make altinstall
-#RUN update-alternatives --install /usr/bin/python3 python3 /usr/src/bin/python3.9 1
 RUN apt install python3-pip --assume-yes
 RUN apt-get purge --assume-yes --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
 rm -rf /var/lib/apt/lists/*
