@@ -58,20 +58,18 @@ $HOME/.config/containers/registries.conf is a TOML config file that can be used 
 
 ### Building static network
 
-
 ```
-The pod_network.sh script creates the static network for mininet
+The 1_build_network.sh script creates the static network for mininet
 ```
 
 podman network create --gateway "192.168.0.1" --subnet "192.168.0.0/24" kytos_network
 
-
-
 ### Building base containers
 
-
 ```
-The pod_build.sh script creates all images below
+The 2_build_debian_base.sh script creates Debian base Image
+The 3_build_ubuntu_base.sh script creates Ubuntu base Image
+The 4_build_containers.sh script creates Kytos Containers Images and Mininet
 ```
 
 ```
@@ -127,3 +125,11 @@ Create a local mininet image
 ```
 
 podman build -f ./container-mininet/Dockerfile -t mininet .
+
+```
+The 5_pod_compose.sh Start containers with podman-compose 
+```
+
+ $ podman-compose down
+ $ podman-compose --podman-run-args='--network kytos_network' up -d
+

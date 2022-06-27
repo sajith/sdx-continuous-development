@@ -6,6 +6,6 @@ RUN mkdir -p /app
 WORKDIR /app
 
 # add app
-COPY ./app /app/
+COPY ./container-app /app/
 
 ENTRYPOINT ["./gunicorn.sh"]

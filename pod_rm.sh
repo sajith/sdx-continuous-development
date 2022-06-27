@@ -1,4 +1,8 @@
 #!/bin/sh
+podman-compose down -v
+podman machine stop
+podman machine start
+
 sudo podman system prune --all --volumes
 
 # Remove all containers that aren't running.
