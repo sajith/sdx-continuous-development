@@ -10,7 +10,10 @@
 
 ** 
 
-## Goal
+## Requirements
+
+Python 3.9
+Podman 4.1
 
 ## Set Up
 
@@ -19,16 +22,6 @@
 ```python 
 git clone https://github.com/atlanticwave-sdx/sdx-api.git
 cd sdx-api
-```
-
-### Install Dependencies
-
-```python
-$ python3.9 -m venv venv
-$ source venv/bin/activate
-$ export PYTHONPATH=$PWD
-$ pip3 install -r requirements.txt
-$ python3.9 -m pip install --upgrade pip
 ```
 
 ## PODMAN
