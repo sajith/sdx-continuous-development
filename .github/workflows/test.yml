@@ -64,6 +64,10 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install podman-compose
 
+      - name: Print podman info
+        run: |
+          podman info --debug
+          
       - name: Print versions
         run: |
           podman version
