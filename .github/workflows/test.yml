@@ -54,7 +54,7 @@ jobs:
         run: |
           sudo apt install podman
 
-      - name: Install podmman [macOS]
+      - name: Install podman [macOS]
         if: matrix.os == 'macos-latest'
         run: |
           brew install podman
