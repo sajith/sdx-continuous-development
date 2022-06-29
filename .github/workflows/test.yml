@@ -131,6 +131,7 @@ jobs:
       #     # podman build -f ./container-sdx-lc/Dockerfile -t sdx_lc .
 
       - name: Build sdx_api image
+        run: |
           echo "Running: podman build -f ./container-app/Dockerfile -t sdx_api ."
           podman build -f ./container-app/Dockerfile -t sdx_api .
 
