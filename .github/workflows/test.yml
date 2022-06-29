@@ -91,3 +91,6 @@ jobs:
           echo "====== Running: podman-compose version ======"
           podman-compose version
 
+      - name: Run podman-compose up
+        run: |
+          podman-compose up
