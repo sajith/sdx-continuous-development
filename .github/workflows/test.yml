@@ -69,16 +69,16 @@ jobs:
       - name: Set up podman virtual machine [macOS]
         if: matrix.os == 'macos-latest'
         run: |
-          echo "====== Running podman machine init ======"
+          echo "====== Running: podman machine init ======"
           podman machine init
 
-          echo "====== Running podman machine start ======"
+          echo "====== Running: podman machine start ======"
           podman machine start
 
-          echo "====== Running podman machine list ======"
+          echo "====== Running: podman machine list ======"
           podman machine list
 
-          echo "====== Running podman system connection list ======"
+          echo "====== Running: podman system connection list ======"
           podman system connection list
 
       - name: Print podman info
@@ -87,6 +87,8 @@ jobs:
           
       - name: Print versions
         run: |
+          echo "====== Running: podman version ====="=
           podman version
+          echo "====== Running: podman-compose version ======"
           podman-compose version
 
