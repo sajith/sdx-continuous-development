@@ -91,6 +91,25 @@ jobs:
           echo "====== Running: podman-compose version ======"
           podman-compose version
 
+      - name: Build container images
+        run: |
+          echo "Running: podman build -f ./container-amlight/Dockerfile -t amlight ."
+          podman build -f ./container-amlight/Dockerfile -t amlight .
+
+          echo "Running: podman build -f ./container-sax/Dockerfile -t sax ."
+          podman build -f ./container-sax/Dockerfile -t sax .
+
+          echo "Running: podman build -f ./container-tenet/Dockerfile -t tenet ."
+          podman build -f ./container-tenet/Dockerfile -t tenet .
+
+          echo "Running: podman build -f ./container-mongo/Dockerfile -t mongo_db ."
+          podman build -f ./container-mongo/Dockerfile -t mongo_db .
+
+          # podman build -f ./container-sdx-lc/Dockerfile -t sdx_lc .
+
+          echo "Running: podman build -f ./container-app/Dockerfile -t sdx_api ."
+          podman build -f ./container-app/Dockerfile -t sdx_api .
+
       - name: Run podman-compose up
         run: |
           podman-compose up
