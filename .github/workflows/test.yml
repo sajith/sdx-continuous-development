@@ -62,6 +62,10 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install podman-compose
 
+      - name: Print podman system connection
+        run: |
+          podman system connection list
+
       - name: Print podman info
         run: |
           podman info --debug
