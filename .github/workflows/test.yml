@@ -72,6 +72,9 @@ jobs:
           echo "====== Running podman machine init ======"
           podman machine init
 
+          echo "====== Running podman machine start ======"
+          podman machine start
+
           echo "====== Running podman machine list ======"
           podman machine list
 
