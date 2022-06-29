@@ -103,7 +103,7 @@ jobs:
 
       - name: Build mininet image
         run: |
-          echo: "Running: podman build -f ./container-mininet/Dockerfile -t mininet ."
+          echo "Running: podman build -f ./container-mininet/Dockerfile -t mininet ."
           podman build -f ./container-mininet/Dockerfile -t mininet .
 
       - name: Build amlight image
