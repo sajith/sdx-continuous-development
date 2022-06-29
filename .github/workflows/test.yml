@@ -52,7 +52,7 @@ jobs:
       - name: Install podman [Ubuntu]
         if: matrix.os == 'ubuntu-latest'
         run: |
-          apt install podman
+          sudo apt install podman
 
       - name: Install podmman [macOS]
         if: matrix.os == 'macos-latest'
