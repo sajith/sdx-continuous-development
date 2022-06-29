@@ -1,0 +1,71 @@
+name: Test
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+
+    runs-on:
+      - ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+        python-version:
+          - "3.8"
+          - "3.9"
+          - "3.10"
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      # See https://github.com/marketplace/actions/setup-python
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      # See https://github.com/marketplace/actions/cache
+      - name: Get pip cache dir
+        id: pip-cache
+        run: |
+          echo "::set-output name=dir::$(pip cache dir)"
+
+      - name: Set up pip cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pip-cache.outputs.dir }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/setup.cfg') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install podman [Ubuntu]
+        if: matrix.os == 'ubuntu-latest'
+        name: |
+          apt install podman
+
+      - name: Install podmman [macOS]
+        if: matrix.os == 'macos-latest'
+        run: |
+          brew install podman
+
+      - name: Install podman-compose
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install podman-compose
+
+      - name: Print versions
+        run: |
+          podman version
+          podman-compose version
+
