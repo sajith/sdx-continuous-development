@@ -96,6 +96,9 @@ jobs:
           echo "Running: podman build -f ./os_base/debian_base/Dockerfile -t debian_base ."
           podman build -f ./os_base/debian_base/Dockerfile -t debian_base .
 
+          echo "Running: podman build -f ./os_base/ubuntu_base/Dockerfile -t ubuntu_base ."
+          podman build -f ./os_base/ubuntu_base/Dockerfile -t ubuntu_base .
+
           echo "Running: podman build -f ./container-amlight/Dockerfile -t amlight ."
           podman build -f ./container-amlight/Dockerfile -t amlight .
 
