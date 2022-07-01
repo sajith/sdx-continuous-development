@@ -86,7 +86,7 @@ jobs:
 
       - name: Print versions
         run: |
-          echo "====== Running: podman version ====="=
+          echo "====== Running: podman version ======"
           podman version
 
       - name: Build Debian base image
