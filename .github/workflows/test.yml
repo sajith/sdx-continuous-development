@@ -135,6 +135,7 @@ jobs:
           echo "Running: podman build -f ./container-app/Dockerfile -t sdx_api ."
           podman build -f ./container-app/Dockerfile -t sdx_api .
 
-      - name: Run podman-compose up
-        run: |
-          podman-compose up
+      # TODO: figure out a way to invoke this in CI.    
+      # - name: Run podman-compose up
+      #   run: |
+      #     podman-compose up
