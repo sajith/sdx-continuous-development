@@ -56,10 +56,10 @@ jobs:
         run: |
           brew install podman
 
-      - name: Install podman-compose
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install podman-compose
+      # - name: Install podman-compose
+      #   run: |
+      #     python -m pip install --upgrade pip
+      #     python -m pip install podman-compose
 
       - name: Print podman system connection
         run: |
@@ -88,8 +88,6 @@ jobs:
         run: |
           echo "====== Running: podman version ====="=
           podman version
-          echo "====== Running: podman-compose version ======"
-          podman-compose version
 
       - name: Build Debian base image
         run: |
@@ -135,7 +133,3 @@ jobs:
           echo "Running: podman build -f ./container-app/Dockerfile -t sdx_api ."
           podman build -f ./container-app/Dockerfile -t sdx_api .
 
-      # TODO: figure out a way to invoke this in CI.    
-      # - name: Run podman-compose up
-      #   run: |
-      #     podman-compose up
