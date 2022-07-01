@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  test:
+  build-images:
 
     runs-on:
       - ${{ matrix.os }}
