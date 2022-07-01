@@ -83,7 +83,7 @@ jobs:
       - name: Print podman info
         run: |
           podman info --debug
-          
+
       - name: Print versions
         run: |
           echo "====== Running: podman version ====="=
@@ -133,3 +133,7 @@ jobs:
           echo "Running: podman build -f ./container-app/Dockerfile -t sdx_api ."
           podman build -f ./container-app/Dockerfile -t sdx_api .
 
+
+      - name: List images
+        run: |
+          podman images
