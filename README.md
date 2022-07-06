@@ -43,7 +43,7 @@ taking, at the moment anyway:
  * [Podman Compose](https://github.com/containers/podman-compose)
 
 We will try to have our setup running on macOS and current Debian
-stable.
+stable, and maybe Fedora.
 
 
 ## Setting up for development
@@ -55,24 +55,38 @@ $ git clone https://github.com/atlanticwave-sdx/sdx-continuous-development.git
 $ cd sdx-continuous-development
 ```
 
-### Install podman
+### Install Podman and Podman Compose
 
 On Debian and Ubuntu, do this:
 
 ``` shellsession
-$ sudo apt-get –y install podman
+$ sudo apt install podman
 ```
 
-On Fedora, do this:
+Podman Compose is not on official Debian and Ubuntu repositories yet;
+installing it using [pipx](https://pypi.org/project/pipx/) seems to be
+a good idea:
 
 ``` shellsession
-$ sudo dnf install podman
+$ sudo apt install python3-pip
+$ python3 -m pip install --user --upgrade pip
+$ python3 -m pip install --user --upgrade pipx
+$ pipx install podman-compose
+```
+
+(See [podman-compose](https://github.com/containers/podman-compose)
+documentation for alternatives.)
+
+On Fedora, install podman and podman-compose with:
+
+``` shellsession
+$ sudo dnf install podman podman-compose
 ```
 
 On macOS, do this:
 
 ``` shellsession
-$ brew install podman
+$ brew install podman podman-compose
 ```
 
 On macOS, you will also need to initialize a virtual machine to run
@@ -83,16 +97,6 @@ Podman containers, with the following commands:
 $ podman machine init
 $ podman machine start
 ```
-
-## Install podman-compose
-
-See documentation of
-[podman-compose](https://github.com/containers/podman-compose)
-project.
-
- * On macOS, install it using `brew install podman-compose`.
- * On Debian/Ubuntu, install it using `pipx install podman-compose`.
- * On Fedora, install it using `sudo dnf install podman-compose`.
 
 ## Preparing your environment
 
