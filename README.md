@@ -1,47 +1,98 @@
-# SDX API
+# CI/CD for AtlanticWave-SDX project
 
-## Purpose
+## What is this?
 
-* Along with Python and FastAPI, we'll use Docker to quickly set up our local development environment and simplify deployment. 
-* We'll use pytest instead of unittest for writing unit and integration tests to test the API. 
-* We'll store the code on a GitHub repository and utilize GitHub Actions to run tests before deploying to AWS.
-* GitHub Actions is a continuous integration and delivery (CI/CD) solution, fully integrated with GitHub. 
-* MONGODB
+This repository is meant to continuously test the integration of
+various [AtlanticWave-SDX](https://www.atlanticwave-sdx.net/) project
+components, and for code to be deployed in the test environment
+quicker.
 
-** 
+Atlanticwave-SDX is composed of several components:
+
+ * [kytos-sdx-topology](https://github.com/atlanticwave-sdx/kytos-sdx-topology) 
+ * [sdx-controller](https://github.com/atlanticwave-sdx/sdx-controller)
+ * [sdx-controller-client](https://github.com/atlanticwave-sdx/sdx-controller-client)
+ * [sdx-lc](https://github.com/atlanticwave-sdx/sdx-lc)
+ * [sdx-lc-client](https://github.com/atlanticwave-sdx/sdx-lc-client)
+ * [pce](https://github.com/atlanticwave-sdx/pce)
+ * [datamodel](https://github.com/atlanticwave-sdx/datamodel)
+ 
+We will also use [Kyotos-NG](https://github.com/kytos-ng/) (and
+thereby MongoDB), and RabittMQ.
+
+
+## Approach
+
+Things are in an exploratory stage right now.  This is the approach we
+taking, at the moment anyway:
+
+* Along with Python and FastAPI, we will use Podman to quickly set up
+  our local development environment, and to simplify deployment.
+  
+* We will use pytest instead of unittest for writing unit and
+  integration tests.
+  
+* Since our code is on GitHub, to the extent possible, we will use
+  GitHub Actions to run tests before deploying.
+
 
 ## Requirements
 
-Python 3.9
-Podman 4.1
+ * Python 3.9
+ * [Podman](https://podman.io/)
+ * [Podman Compose](https://github.com/containers/podman-compose)
 
-## Set Up
+We will try to have our setup running on macOS and current Debian
+stable.
+
+
+## Setting up for development
 
 ### Get Code From GitHub
 
-```python 
-git clone https://github.com/atlanticwave-sdx/sdx-api.git
-cd sdx-api
+``` shellsession
+$ git clone https://github.com/atlanticwave-sdx/sdx-continuous-development.git
+$ cd sdx-continuous-development
 ```
 
-## PODMAN
+### Install podman
 
-### Installing Podman on Debian
+On Debian and Ubuntu, do this:
 
- $ apt-get –y install podman
-
-### Installing Podman on macOS
-
- $ brew install podman
-
-``` To initialize the VM running the Linux box, run the following commands:
+``` shellsession
+$ sudo apt-get –y install podman
 ```
 
- $ podman machine init
+On Fedora, do this:
 
- $ podman machine start
+``` shellsession
+$ sudo dnf install podman
+```
 
- $ pip3 install podman-compose
+On macOS, do this:
+
+``` shellsession
+$ brew install podman
+```
+
+On macOS, you will also need to initialize a virtual machine to run
+Podman containers, with the following commands:
+
+
+``` shellsession
+$ podman machine init
+$ podman machine start
+```
+
+## Install podman-compose
+
+See documentation of
+[podman-compose](https://github.com/containers/podman-compose)
+project.
+
+ * On macOS, install it using `brew install podman-compose`.
+ * On Debian/Ubuntu, install it using `pipx install podman-compose`.
+ * On Fedora, install it using `sudo dnf install podman-compose`.
 
 ## Preparing your environment
 
