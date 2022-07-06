@@ -3,23 +3,21 @@
 ## What is this?
 
 This repository is meant to continuously test the integration of
-various [AtlanticWave-SDX](https://www.atlanticwave-sdx.net/) project
-components, and for code to be deployed in the test environment
-quicker.
+various [AtlanticWave-SDX][aw-sdx] project components, and for code to
+be deployed in the test environment quicker.
 
 Atlanticwave-SDX is composed of several components:
 
- * [kytos-sdx-topology](https://github.com/atlanticwave-sdx/kytos-sdx-topology) 
- * [sdx-controller](https://github.com/atlanticwave-sdx/sdx-controller)
- * [sdx-controller-client](https://github.com/atlanticwave-sdx/sdx-controller-client)
- * [sdx-lc](https://github.com/atlanticwave-sdx/sdx-lc)
- * [sdx-lc-client](https://github.com/atlanticwave-sdx/sdx-lc-client)
- * [pce](https://github.com/atlanticwave-sdx/pce)
- * [datamodel](https://github.com/atlanticwave-sdx/datamodel)
- 
-We will also use [Kyotos-NG](https://github.com/kytos-ng/) SDN
-Platform (and thereby MongoDB), and RabittMQ, and
-[mininet](http://mininet.org/).
+ * [kytos-sdx-topology][sdx-topology]
+ * [sdx-controller][sdx-controller]
+ * [sdx-controller-client][sdx-controller-client]
+ * [sdx-lc][sdx-lc]
+ * [sdx-lc-client][sdx-lc-client]
+ * [pce][sdx-pce]
+ * [datamodel][sdx-datamodel]
+
+We will also use [Kyotos-NG][kyotos-ng] SDN Platform (and thereby
+MongoDB), and RabittMQ, and [mininet][mininet].
 
 
 ## Approach
@@ -29,10 +27,10 @@ taking, at the moment anyway:
 
 * Along with Python and FastAPI, we will use Podman to quickly set up
   our local development environment, and to simplify deployment.
-  
+
 * We will use pytest instead of unittest for writing unit and
   integration tests.
-  
+
 * Since our code is on GitHub, to the extent possible, we will use
   GitHub Actions to run tests before deploying.
 
@@ -40,8 +38,8 @@ taking, at the moment anyway:
 ## Requirements
 
  * Python 3.9
- * [Podman](https://podman.io/)
- * [Podman Compose](https://github.com/containers/podman-compose)
+ * [Podman][podman]
+ * [Podman Compose][podman-compose]
 
 We will try to have our setup running on macOS and current Debian
 stable, and maybe Fedora.
@@ -65,8 +63,7 @@ $ sudo apt install podman
 ```
 
 Podman Compose is not on official Debian and Ubuntu repositories yet;
-installing it using [pipx](https://pypi.org/project/pipx/) seems to be
-a good idea:
+installing it using [pipx][pipx] seems to be a good idea:
 
 ``` shellsession
 $ sudo apt install python3-pip
@@ -75,8 +72,7 @@ $ python3 -m pip install --user --upgrade pipx
 $ pipx install podman-compose
 ```
 
-(See [podman-compose](https://github.com/containers/podman-compose)
-documentation for alternatives.)
+(See [podman-compose][podman-compose] documentation for alternatives.)
 
 On Fedora, install podman and podman-compose with:
 
@@ -150,7 +146,7 @@ $ podman images
 To remove an image:
 
 ``` shellsession
-$ podman image rm <image_id> 
+$ podman image rm <image_id>
 ```
 
 To Create a local kytos images using the Debian base image:
@@ -185,3 +181,23 @@ To start containers with podman-compose:
 $ podman-compose down
 $ podman-compose --podman-run-args='--network kytos_network' up -d
 ```
+
+<!-- References -->
+
+[aw-sdx]: https://www.atlanticwave-sdx.net/
+
+[sdx-topology]: https://github.com/atlanticwave-sdx/kytos-sdx-topology
+[sdx-controller]: https://github.com/atlanticwave-sdx/sdx-controller
+[sdx-controller-client]: https://github.com/atlanticwave-sdx/sdx-controller-client
+[sdx-lc]: https://github.com/atlanticwave-sdx/sdx-lc
+[sdx-lc-client]: https://github.com/atlanticwave-sdx/sdx-lc-client
+[sdx-pce]: https://github.com/atlanticwave-sdx/pce
+[sdx-datamodel]: https://github.com/atlanticwave-sdx/datamodel
+
+[kytos-ng]: https://github.com/kytos-ng/
+[mininet]: http://mininet.org/
+
+[podman]: https://podman.io/
+[podman-compose]: https://github.com/containers/podman-compose
+
+[pipx]: https://pypi.org/project/pipx/
