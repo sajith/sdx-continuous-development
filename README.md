@@ -67,8 +67,8 @@ $ python3 -m pip install --user --upgrade pipx
 $ pipx install podman-compose
 ```
 
-(See [podman-compose][podman-compose] documentation for alternative
-methods.)
+(See [Podman Compose][podman-compose] project's documentation for
+other methods of installing it.)
 
 On Fedora, install podman and podman-compose with:
 
