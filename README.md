@@ -105,80 +105,82 @@ can be used to customize whitelisted registries that are allowed to be
 searched and used as image sources.
 
 
+## Usage notes
+
 ### Building static network
 
-```
-The 1_build_network.sh script creates the static network for mininet
-```
+The script `1_build_network.sh` creates the static network for
+mininet, with this command:
 
-podman network create --gateway "192.168.0.1" --subnet "192.168.0.0/24" kytos_network
+``` shellsession
+$ podman network create --gateway "192.168.0.1" --subnet "192.168.0.0/24" kytos_network
+```
 
 ### Building base containers
 
-```
-The 2_build_debian_base.sh script creates Debian base Image
-The 3_build_ubuntu_base.sh script creates Ubuntu base Image
-The 4_build_containers.sh script creates Kytos Containers Images and Mininet
-```
 
-```
-Create a local Debian base image to be used for kytos containers
-```
-
- $ podman build -f ./os_base/debian_base/Dockerfile -t debian_base .
-
-```
-Access the image with bash
-```
-
- $ podman run -it debian_base /bin/bash
+ * The script `2_build_debian_base.sh` script creates a Debian base Image.
+ * The script `3_build_ubuntu_base.sh` script creates an Ubuntu base Image.
+ * The script `4_build_containers.sh` script creates Kytos Containers
+   Images and Mininet.
 
 
-```
-Access the image id
+### Using Podman
+
+Creating a local Debian base image to be used for Kytos containers
+
+
+``` shellsession
+$ podman build -f ./os_base/debian_base/Dockerfile -t debian_base .
 ```
 
- $ podman images
+To access the image with bash:
 
-
-```
-Removing the image
-```
-
- $ podman image rm <image_id> 
-
-
-```
-Create a local kytos images using the Debian base image 
+``` shellsession
+$ podman run -it debian_base /bin/bash
 ```
 
- $ podman build -f ./container-amlight/Dockerfile -t amlight .
- $ podman build -f ./container-sax/Dockerfile -t sax .
- $ podman build -f ./container-tenet/Dockerfile -t tenet .
+To list available images:
 
-
-```
-Create a local mongodb image 
+``` shellsession
+$ podman images
 ```
 
-podman build -f ./container-mongo/Dockerfile -t mongo_db .
+To remove an image:
 
-```
-Create a local Ubuntu base image to be used for mininet container
-```
-
-podman build -f ./os_base/ubuntu_base/Dockerfile -t ubuntu_base .
-
-```
-Create a local mininet image 
+``` shellsession
+$ podman image rm <image_id> 
 ```
 
-podman build -f ./container-mininet/Dockerfile -t mininet .
+To Create a local kytos images using the Debian base image:
 
+``` shellsession
+$ podman build -f ./container-amlight/Dockerfile -t amlight .
+$ podman build -f ./container-sax/Dockerfile -t sax .
+$ podman build -f ./container-tenet/Dockerfile -t tenet .
 ```
-The 5_pod_compose.sh Start containers with podman-compose 
+
+To create a local mongodb image:
+
+``` shellsession
+$ podman build -f ./container-mongo/Dockerfile -t mongo_db .
 ```
 
- $ podman-compose down
- $ podman-compose --podman-run-args='--network kytos_network' up -d
+To create a local Ubuntu base image to be used for mininet container:
 
+``` shellsession
+$ podman build -f ./os_base/ubuntu_base/Dockerfile -t ubuntu_base .
+```
+
+To create a local mininet image:
+
+``` shellsession
+$ podman build -f ./container-mininet/Dockerfile -t mininet .
+```
+
+To start containers with podman-compose:
+
+``` shellsession
+$ podman-compose down
+$ podman-compose --podman-run-args='--network kytos_network' up -d
+```
