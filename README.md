@@ -116,19 +116,16 @@ mininet, using this command:
 $ podman network create --gateway "192.168.0.1" --subnet "192.168.0.0/24" kytos_network
 ```
 
-### Building base containers
+### Building container images
 
-
- * The script `2_build_debian_base.sh` script creates a Debian base Image.
- * The script `3_build_ubuntu_base.sh` script creates an Ubuntu base Image.
- * The script `4_build_containers.sh` script creates Kytos Containers
-   Images and Mininet.
-
+ * The script `2_build_debian_base.sh` script creates a Debian base image.
+ * The script `3_build_ubuntu_base.sh` script creates an Ubuntu base image.
+ * The script `4_build_containers.sh` script creates Kytos and mininet
+   container images.
 
 ### Using Podman
 
-Creating a local Debian base image to be used for Kytos containers
-
+To create a local Debian base image to be used for Kytos containers:
 
 ``` shellsession
 $ podman build -f ./os_base/debian_base/Dockerfile -t debian_base .
@@ -152,7 +149,7 @@ To remove an image:
 $ podman image rm <image_id>
 ```
 
-To Create a local kytos images using the Debian base image:
+To create local Kytos images using the Debian base image:
 
 ``` shellsession
 $ podman build -f ./container-amlight/Dockerfile -t amlight .
@@ -166,7 +163,7 @@ To create a local mongodb image:
 $ podman build -f ./container-mongo/Dockerfile -t mongo_db .
 ```
 
-To create a local Ubuntu base image to be used for mininet container:
+To create a local Ubuntu base image, to be used for mininet container:
 
 ``` shellsession
 $ podman build -f ./os_base/ubuntu_base/Dockerfile -t ubuntu_base .
