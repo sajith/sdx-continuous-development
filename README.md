@@ -98,11 +98,12 @@ $ podman machine init
 $ podman machine start
 ```
 
-## Preparing your environment
+### A note about registries
 
-```
-$HOME/.config/containers/registries.conf is a TOML config file that can be used to customize whitelisted registries that are allowed to be searched and used as image sources
-```
+`$HOME/.config/containers/registries.conf` is a TOML config file that
+can be used to customize whitelisted registries that are allowed to be
+searched and used as image sources.
+
 
 ### Building static network
 
