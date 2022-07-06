@@ -133,7 +133,13 @@ jobs:
           echo "Running: podman build -f ./container-app/Dockerfile -t sdx_api ."
           podman build -f ./container-app/Dockerfile -t sdx_api .
 
-
       - name: List images
         run: |
           podman images
+
+      # Just make sure that we can do this    
+      - name: Run podman-compose up/down
+        run: |
+          podman-compose up --detach
+          podman-compose down
+
