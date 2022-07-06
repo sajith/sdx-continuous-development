@@ -56,10 +56,10 @@ jobs:
         run: |
           brew install podman
 
-      # - name: Install podman-compose
-      #   run: |
-      #     python -m pip install --upgrade pip
-      #     python -m pip install podman-compose
+      - name: Install podman-compose
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install podman-compose
 
       - name: Print podman system connection
         run: |
