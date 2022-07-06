@@ -137,9 +137,10 @@ jobs:
         run: |
           podman images
 
-      # Just make sure that we can do this
+      # Make sure that we can run "podman-compose up" without errors.
       - name: Run podman-compose up
         run: podman-compose up --detach
 
+      # Make sure that we can run "podman-compose down" without errors.        
       - name: Run podman-compose down
         run: podman-compose down
