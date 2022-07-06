@@ -1,12 +1,10 @@
 # CI/CD for AtlanticWave-SDX project
 
-## What is this?
-
 This repository is meant to continuously test the integration of
-various [AtlanticWave-SDX][aw-sdx] project components, and for code to
-be deployed in the test environment quicker.
+various pieces of the [AtlanticWave-SDX][aw-sdx] project, and for code
+to be deployed in the test environment quicker.
 
-Atlanticwave-SDX is composed of several components:
+Atlanticwave-SDX is composed of several pieces:
 
  * [kytos-sdx-topology][sdx-topology]
  * [sdx-controller][sdx-controller]
