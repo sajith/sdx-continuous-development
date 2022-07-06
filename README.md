@@ -16,7 +16,7 @@ Atlanticwave-SDX is composed of several components:
  * [pce][sdx-pce]
  * [datamodel][sdx-datamodel]
 
-We will also use [Kyotos-NG][kyotos-ng] SDN Platform (and thereby
+We will also use [Kytos-NG][kytos-ng] SDN Platform (and thereby
 MongoDB), and RabittMQ, and [mininet][mininet].
 
 
