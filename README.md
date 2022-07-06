@@ -33,7 +33,9 @@ taking, at the moment anyway:
   GitHub Actions to run tests before deploying.
 
 
-## Requirements
+## Development setup
+
+We will need the following:
 
  * Python 3.9
  * [Podman][podman]
@@ -42,19 +44,14 @@ taking, at the moment anyway:
 We will try to have our setup running on macOS and current Debian
 stable, and maybe Fedora.
 
+Install Python 3.9 from your distribution's repositories, or using
+something like Homebrew.  See below for hints about installing podman
+and podman-compose.
 
-## Setting up for development
+### Installing Podman and Podman Compose
 
-### Get Code From GitHub
-
-``` shellsession
-$ git clone https://github.com/atlanticwave-sdx/sdx-continuous-development.git
-$ cd sdx-continuous-development
-```
-
-### Install Podman and Podman Compose
-
-On Debian and Ubuntu, do this:
+On Debian and Ubuntu, install Podman from the respective
+distributions' repositories:
 
 ``` shellsession
 $ sudo apt install podman
@@ -70,7 +67,8 @@ $ python3 -m pip install --user --upgrade pipx
 $ pipx install podman-compose
 ```
 
-(See [podman-compose][podman-compose] documentation for alternatives.)
+(See [podman-compose][podman-compose] documentation for alternative
+methods.)
 
 On Fedora, install podman and podman-compose with:
 
@@ -99,6 +97,13 @@ $ podman machine start
 can be used to customize whitelisted registries that are allowed to be
 searched and used as image sources.
 
+
+### Get Code From GitHub
+
+``` shellsession
+$ git clone https://github.com/atlanticwave-sdx/sdx-continuous-development.git
+$ cd sdx-continuous-development
+```
 
 ## Usage notes
 
