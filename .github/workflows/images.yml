@@ -48,13 +48,11 @@ jobs:
 
       - name: Install podman [Ubuntu]
         if: matrix.os == 'ubuntu-latest'
-        run: |
-          sudo apt install podman
+        run: sudo apt install podman
 
       - name: Install podman [macOS]
         if: matrix.os == 'macos-latest'
-        run: |
-          brew install podman
+        run: brew install podman
 
       - name: Install podman-compose
         run: |
@@ -62,8 +60,7 @@ jobs:
           python3 -m pip install podman-compose
 
       - name: Print podman system connection
-        run: |
-          podman system connection list
+        run: podman system connection list
 
       - name: Set up podman virtual machine [macOS]
         if: matrix.os == 'macos-latest'
@@ -81,8 +78,7 @@ jobs:
           podman system connection list
 
       - name: Print podman info
-        run: |
-          podman info --debug
+        run: podman info --debug
 
       - name: Print versions
         run: |
@@ -134,8 +130,7 @@ jobs:
           podman build -f ./container-app/Dockerfile -t sdx_api .
 
       - name: List images
-        run: |
-          podman images
+        run: podman images
 
       # Make sure that we can run "podman-compose up" without errors.
       - name: Run podman-compose up
