@@ -137,9 +137,9 @@ jobs:
         run: |
           podman images
 
-      # Just make sure that we can do this    
-      - name: Run podman-compose up/down
-        run: |
-          podman-compose up --detach
-          podman-compose down
+      # Just make sure that we can do this
+      - name: Run podman-compose up
+        run: podman-compose up --detach
 
+      - name: Run podman-compose down
+        run: podman-compose down
