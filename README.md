@@ -91,14 +91,14 @@ $ podman machine init
 $ podman machine start
 ```
 
-### A note about registries
+### A note about container registries
 
 `$HOME/.config/containers/registries.conf` is a TOML config file that
 can be used to customize whitelisted registries that are allowed to be
 searched and used as image sources.
 
 
-### Get Code From GitHub
+### Get code From GitHub
 
 ``` shellsession
 $ git clone https://github.com/atlanticwave-sdx/sdx-continuous-development.git
@@ -107,10 +107,10 @@ $ cd sdx-continuous-development
 
 ## Usage notes
 
-### Building static network
+### Building a static network
 
 The script `1_build_network.sh` creates the static network for
-mininet, with this command:
+mininet, using this command:
 
 ``` shellsession
 $ podman network create --gateway "192.168.0.1" --subnet "192.168.0.0/24" kytos_network
