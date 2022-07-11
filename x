@@ -31,4 +31,15 @@ services:
     ports:
       - 6655:6655
       - 8383:8181
+  mininet:
+    container_name: mininet
+    image: mininet
+    privileged: true
+    network_mode: "host"
+    volumes:
+      - /lib/modules:/lib/modules
+    depends_on:
+      - amlight
+      - sax
+      - tenet
 
