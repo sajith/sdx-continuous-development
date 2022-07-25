@@ -2,7 +2,7 @@
 
 ## Purpose
 
-* Along with Python and FastAPI, we'll use Docker to quickly set up our local development environment and simplify deployment. 
+* Along with Python, Mininet and Kytos, we'll use Multipass to quickly set up our local development environment and simplify deployment. 
 * We'll use pytest instead of unittest for writing unit and integration tests to test the API. 
 * We'll store the code on a GitHub repository and utilize GitHub Actions to run tests before deploying to AWS.
 * GitHub Actions is a continuous integration and delivery (CI/CD) solution, fully integrated with GitHub. 
@@ -10,119 +10,80 @@
 
 ** 
 
-## Requirements
-
-Python 3.9
-Podman 4.1
-
-## Set Up
-
 ### Get Code From GitHub
 
 ```python 
-git clone https://github.com/atlanticwave-sdx/sdx-api.git
-cd sdx-api
+git clone https://github.com/atlanticwave-sdx/sdx-continuous-development.git
+cd sdx-continuous-development
 ```
 
-## PODMAN
+## Requirements
 
-### Installing Podman on Debian
+Python 3.9
+Multipass Ubuntu 20
 
- $ apt-get –y install podman
+## Set Up
 
-### Installing Podman on macOS
+## Install Multipass on Linux
 
- $ brew install podman
+$ sudo snap install multipass --classic --stable
 
-``` To initialize the VM running the Linux box, run the following commands:
-```
+## Install Multipass on MacOS
 
- $ podman machine init
+$ brew install multipass
 
- $ podman machine start
+## Find out what versions of Ubuntu images are available:
 
- $ pip3 install podman-compose
+$ multipass find
 
-## Preparing your environment
+## Launch a Multipass Ubuntu 20.04 LTS instance:
 
-```
-$HOME/.config/containers/registries.conf is a TOML config file that can be used to customize whitelisted registries that are allowed to be searched and used as image sources
-```
+$ multipass launch 20.04 --name sdx -d 8G -m 1024M -c 1
 
-### Building static network
+## List the installed instance
 
-```
-The 1_build_network.sh script creates the static network for mininet
-```
+$ multipass list
 
-podman network create --gateway "192.168.0.1" --subnet "192.168.0.0/24" kytos_network
+$ multipass sdx info
 
-### Building base containers
+$ multipass help
 
-```
-The 2_build_debian_base.sh script creates Debian base Image
-The 3_build_ubuntu_base.sh script creates Ubuntu base Image
-The 4_build_containers.sh script creates Kytos Containers Images and Mininet
-```
+## connect to the instance
 
-```
-Create a local Debian base image to be used for kytos containers
-```
+multipass shell sdx
 
- $ podman build -f ./os_base/debian_base/Dockerfile -t debian_base .
+## stop and delete instance
 
-```
-Access the image with bash
-```
+$ multipass stop sdx
 
- $ podman run -it debian_base /bin/bash
+$ multipass delete sdx
 
+## mount a local drive inside the instance
 
-```
-Access the image id
-```
+multipass mount ~/sdx-continuous-development sdx:/sdx-continuous-development
 
- $ podman images
+## create ubuntu sdx instance, update, and install mininet
 
+$ multipass launch --name sdx -d 20G -m 8192M -c 2
 
-```
-Removing the image
-```
+$ multipass set client.primary-name=sdx
 
- $ podman image rm <image_id> 
+$ multipass list
 
+$ multipass info sdx
 
-```
-Create a local kytos images using the Debian base image 
-```
+$ multipass exec sdx sudo apt-get update
 
- $ podman build -f ./container-amlight/Dockerfile -t amlight .
- $ podman build -f ./container-sax/Dockerfile -t sax .
- $ podman build -f ./container-tenet/Dockerfile -t tenet .
+$ multipass exec sdx sudo apt-get upgrade
 
+$ multipass exec sdx sudo apt install net-tools
 
-```
-Create a local mongodb image 
-```
+$ multipass exec sdx sudo apt-get install mininet
 
-podman build -f ./container-mongo/Dockerfile -t mongo_db .
+$ multipass exec sdx -- bash -c "sudo mn --version"
 
-```
-Create a local Ubuntu base image to be used for mininet container
-```
+$ multipass exec sdx -- bash -c "sudo mn --switch ovsbr --test pingall"
 
-podman build -f ./os_base/ubuntu_base/Dockerfile -t ubuntu_base .
+$ multipass exec sdx -- bash -c "echo 'deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /' | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list"
 
-```
-Create a local mininet image 
-```
-
-podman build -f ./container-mininet/Dockerfile -t mininet .
-
-```
-The 5_pod_compose.sh Start containers with podman-compose 
-```
-
- $ podman-compose down
- $ podman-compose --podman-run-args='--network kytos_network' up -d
-
+$ multipass exec sdx -- bash -c "curl -L 'https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key' | sudo apt-key add -"
