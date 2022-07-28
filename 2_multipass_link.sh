@@ -27,6 +27,7 @@ multipass exec sdx sudo ip link set veth12 master br0
 multipass exec sdx sudo ip link set veth13 master br0
 echo "##### assign the name spaces gateway IP address to the bridge network interface ##### "
 multipass exec sdx sudo ip addr add 192.168.10.1/28 dev br0
+multipass exec sdx sudo iptables -t nat -A POSTROUTING -s 192.168.10.0/28 ! -o br0 -j MASQUERADE
 echo " ##### Move ceth devices to netns namespaces ##### "
 multipass exec sdx sudo ip link set ceth10 netns netns10
 multipass exec sdx sudo ip link set ceth11 netns netns11
