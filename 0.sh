@@ -1,13 +1,5 @@
 #!/bin/sh
-multipass launch 20.04 --name sdx -d 20G -m 8192M -c 2
-multipass set client.primary-name=sdx
-multipass list
-multipass info sdx
-echo "### Ubuntu Update ###"
-multipass exec sdx sudo apt-get update
-multipass exec sdx sudo apt-get upgrade
-echo "### dependencies install ###"
-multipass exec sdx -- bash -c "apt-get install --assume-yes --no-install-recommends \
+multipass exec sdx -- bash -c "sudo apt-get install --assume-yes --no-install-recommends \
                 build-essential \
 		ca-certificates \
 		dirmngr \
@@ -31,7 +23,6 @@ multipass exec sdx -- bash -c "apt-get install --assume-yes --no-install-recomme
                 lsof \
 		make \
                 mininet \
-		net-tools \
 		netbase \
                 netcat \
                 software-properties-common \
@@ -49,8 +40,3 @@ multipass exec sdx -- bash -c "pip3 install grpcio==1.41.0"
 multipass exec sdx -- bash -c "pip3 install networkx==2.5.1"
 multipass exec sdx -- bash -c "pip3 install eventlet==0.33.0"
 multipass exec sdx -- bash -c "pip3 install black==20.8b0"
-multipass exec sdx -- bash -c "sudo mn --version"
-multipass exec sdx -- bash -c "sudo mn --switch ovsbr --test pingall"
-multipass exec sdx -- bash -c "echo 'deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /' | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list"
-multipass exec sdx -- bash -c "curl -L 'https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key' | sudo apt-key add -"
-multipass exec sdx -- bash -c "sudo bash -c 'echo 1 > /proc/sys/net/ipv4/ip_forward'"
