@@ -20,9 +20,8 @@ cd sdx-continuous-development
 ## Requirements
 
 Python 3.9
-Multipass Ubuntu 20
+Multipass Ubuntu 22.04
 
-## Set Up
 
 ## Install Multipass on Linux
 
@@ -36,15 +35,19 @@ $ brew install multipass
 
 $ multipass find
 
-## Launch a Multipass Ubuntu 20.04 LTS instance:
+## Set Up
 
-$ multipass launch 20.04 --name sdx -d 8G -m 1024M -c 1
+## Run the script 1_multipass_setup.sh
+
+## This script will Launch and setup a Multipass Ubuntu 22.04 LTS instance:
+
+$ multipass launch 22.04 --name sdx -d 8G -m 1024M -c 1
 
 ## List the installed instance
 
 $ multipass list
 
-$ multipass sdx info
+$ multipass info sdx
 
 $ multipass help
 
@@ -52,38 +55,16 @@ $ multipass help
 
 multipass shell sdx
 
-## stop and delete instance
+## mount a local drive inside the instance
+
+multipass mount ./podman sdx:/podman
+
+## stop instance
 
 $ multipass stop sdx
 
+## delete instance
+
 $ multipass delete sdx
 
-## mount a local drive inside the instance
 
-multipass mount ~/sdx-continuous-development sdx:/sdx-continuous-development
-
-## create ubuntu sdx instance, update, and install mininet
-
-$ multipass launch --name sdx -d 20G -m 8192M -c 2
-
-$ multipass set client.primary-name=sdx
-
-$ multipass list
-
-$ multipass info sdx
-
-$ multipass exec sdx sudo apt-get update
-
-$ multipass exec sdx sudo apt-get upgrade
-
-$ multipass exec sdx sudo apt install net-tools
-
-$ multipass exec sdx sudo apt-get install mininet
-
-$ multipass exec sdx -- bash -c "sudo mn --version"
-
-$ multipass exec sdx -- bash -c "sudo mn --switch ovsbr --test pingall"
-
-$ multipass exec sdx -- bash -c "echo 'deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /' | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list"
-
-$ multipass exec sdx -- bash -c "curl -L 'https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key' | sudo apt-key add -"
