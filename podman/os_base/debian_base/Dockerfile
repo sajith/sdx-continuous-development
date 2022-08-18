@@ -24,37 +24,12 @@ ENV PYTHONUNBUFFERED 1
 # Install build dependencies
 RUN set -e
 RUN apt-get update 
-RUN apt-get install --assume-yes --no-install-recommends \
-                build-essential \
-		ca-certificates \
-		dirmngr \
-		dpkg-dev \
-		gcc \
-                git \
-		gnupg \
-                gunicorn \
-                iputils-ping \
-		libbz2-dev \
-		libc6-dev \
-		libexpat1-dev \
-		libffi-dev \
-		liblzma-dev \
-                libncurses5-dev \
-                libgdbm-dev \
-                libnss3-dev \
-                libreadline-dev \
-		libsqlite3-dev \
-		libssl-dev \
-                lsof \
-		make \
-                mininet \
-		netbase \
-                netcat \
-                software-properties-common \
-		uuid-dev \
-		wget \
-		xz-utils \
-		zlib1g-dev
+
+RUN apt-get install --assume-yes ca-certificates dirmngr dpkg-dev gcc git \
+gnupg gunicorn iputils-ping libbz2-dev libc6-dev libexpat1-dev libffi-dev \
+liblzma-dev libncurses5-dev libgdbm-dev libnss3-dev libreadline-dev \
+libsqlite3-dev libssl-dev lsof make mininet netbase netcat \
+software-properties-common uuid-dev wget xz-utils zlib1g-dev
 
 WORKDIR /usr/src/
 RUN apt install python3-pip --assume-yes

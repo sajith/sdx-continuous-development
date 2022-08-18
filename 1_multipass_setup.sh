@@ -19,7 +19,7 @@ multipass exec sdx -- bash -c "sudo add-apt-repository -y ppa:deadsnakes/ppa"
 multipass exec sdx -- bash -c "sudo apt-get install --assume-yes python3.9"
 multipass exec sdx -- bash -c "sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1"
 multipass exec sdx -- bash -c "sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 2"
-multipass exec sdx -- bash -c "sudo apt-get install --assume-yes --reinstall python3.9-distutils
+multipass exec sdx -- bash -c "sudo apt-get install --assume-yes --reinstall python3.9-distutils"
 echo "### set mininet ###"
 multipass exec sdx -- bash -c "sudo mn --version"
 multipass exec sdx -- bash -c "sudo mn --switch ovsbr --test pingall"
